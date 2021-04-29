@@ -27,12 +27,19 @@ for i in listdir("images/Images/"):
         img = Image.open("images/Images/"+i+"/"+j)     #load example image from images
         img_tensor = transform(img)         #matrix now (3, 256,256) AND uses transformations and normalisations
         train_data_list.append(img_tensor)
-
+        
+        
         #***********************************************************
         #insert breeds
         #***********************************************************
-
-        target_list.append(breeds)
+        #binary classification nessecary if softmax algorithm should be used
+        dogBreed1 = 1 if 'dogBreed1' in j else 0
+        dogBreed2 = 1 if 'dogBreed2' in j else 0
+        # and so on ...
+        
+        target = [dogBreed1, dogBreed2]
+        
+        target_list.append(target)
         if len(train_data_list) >= 64:     #sets batchsize
             train_data.append((torch.stack(train_data_list),target_list))
             train_data_list = []        #clears list
