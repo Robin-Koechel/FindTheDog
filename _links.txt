@@ -1,0 +1,13 @@
+# simply a linklist, ah, let's call it todo
+https://becominghuman.ai/building-an-image-classifier-using-deep-learning-in-python-totally-from-a-beginners-perspective-be8dbaf22dd8
+https://colab.research.google.com/github/google/eng-edu/blob/master/ml/pc/exercises/image_classification_part1.ipynb
+https://www.pyimagesearch.com/2017/11/06/deep-learning-opencvs-blobfromimage-works/
+https://github.com/opencv/opencv/wiki/Deep-Learning-in-OpenCV
+https://learnopencv.com/
+
+
+https://image-net.org/index.php
+https://cocodataset.org/#home
+
+https://www.tasso.net/Tierregister/Suchmeldungen
+
