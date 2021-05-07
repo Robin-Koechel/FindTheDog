@@ -1,13 +1,40 @@
-# simply a linklist, ah, let's call it todo
+# simply a linklist, ah, let's call it t_odo
 https://becominghuman.ai/building-an-image-classifier-using-deep-learning-in-python-totally-from-a-beginners-perspective-be8dbaf22dd8
-https://colab.research.google.com/github/google/eng-edu/blob/master/ml/pc/exercises/image_classification_part1.ipynb
 https://www.pyimagesearch.com/2017/11/06/deep-learning-opencvs-blobfromimage-works/
 https://github.com/opencv/opencv/wiki/Deep-Learning-in-OpenCV
+
+# tensorflow docs
+https://www.tensorflow.org/versions/r2.1/api_docs/python/tf
+https://www.tensorflow.org/guide
+
+# ml crash course w/ tf
+https://developers.google.com/machine-learning/crash-course/
+
+# training nn
+https://developers.google.com/machine-learning/crash-course/training-neural-networks/video-lecture
+
+# satyas learnopencv.com and code repo
 https://learnopencv.com/
+https://github.com/spmallick/learnopencv
 
+# google on cats and dogs
+https://colab.research.google.com/github/google/eng-edu/blob/master/ml/pc/exercises/image_classification_part1.ipynb
+https://colab.research.google.com/github/google/eng-edu/blob/master/ml/pc/exercises/image_classification_part2.ipynb
+https://colab.research.google.com/github/google/eng-edu/blob/master/ml/pc/exercises/image_classification_part3.ipynb
 
+# image data sets (might include dnn models)
 https://image-net.org/index.php
 https://cocodataset.org/#home
 
+# images to compare to
 https://www.tasso.net/Tierregister/Suchmeldungen
+
+# cnn
+# info on cnn
+https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53
+
+# similarity check on images (with opencv)
+https://stackoverflow.com/questions/11541154/checking-images-for-similarity-with-opencv
+https://www.pyimagesearch.com/2017/06/19/image-difference-with-opencv-and-python/
+https://www.pyimagesearch.com/2014/09/15/python-compare-two-images/
 
