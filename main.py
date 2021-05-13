@@ -24,6 +24,8 @@ train_data_list = []
 train_data = []
 target_list = []
 
+batchsize = 64
+
 files = listdir("images/AllDogImages/")     #creates list with all imges of breed i
 for n in range(len(listdir("images/AllDogImages/"))):
     # random to avoid learn by heart
@@ -193,13 +195,15 @@ for n in range(len(listdir("images/AllDogImages/"))):
     breedClassification()
 
     target_list.append(breedClassification())
-    if len(train_data_list) >= 64:  # sets batchsize
+    if len(train_data_list) >= batchsize:  # sets batchsize
         train_data.append((torch.stack(train_data_list), target_list))
         train_data_list = []  # clears list
 
-        print('Loaded batch ', len(train_data), ' of ', int(len(listdir('images/AllDogImages/'))/64))
-        percentage = (len(train_data)/int(len(listdir('images/AllDogImages/'))/64))*100
+        print('Loaded batch ', len(train_data), ' of ', int(len(listdir('images/AllDogImages/'))/batchsize))
+        percentage = (len(train_data)/int(len(listdir('images/AllDogImages/'))/batchsize))*100
         print('Percentage done', str(percentage)[0:4], '%')
+
+
 
 #print(train_data)
 
@@ -208,28 +212,28 @@ for n in range(len(listdir("images/AllDogImages/"))):
 class Netz(nn.Module):
     def __init__(self):     #Constructor
         super(Netz,self).__init__()
-        self.conv1 = nn.Conv2d(3, 5, kernel_size = 5)       #convolutional layer 1
-        self.conv2 = nn.Conv2d(5,10, kernel_size=5)         #convolutional layer 2
-        self.conv3 = nn.Conv2d(10,20, kernel_size=5)        #convolutional layer 3
-        self.fc1 = nn.Linear(15680,1000)                    #fully connected layer 1 15680--> Neurons
-        self.fc2 = nn.Linear(1000, 119)                       #fully connected layer 2 2 --> Output (Change)
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=1)       #convolutional layer 1
+        self.conv2 = nn.Conv2d(6, 10, kernel_size=1)         #convolutional layer 2
+        self.conv3 = nn.Conv2d(10, 15, kernel_size=1)        #convolutional layer 3
+        self.fc1 = nn.Linear(15360, 1000)                    #fully connected layer 1 15360--> Neurons
+        self.fc2 = nn.Linear(1000, 120)                     #fully connected layer 120 --> Output (Change)
 
 
     def forward(self,x):
         x = self.conv1(x)
-        x = F.max_pool2d(x,119)
+        x = F.max_pool2d(x,2)
         x = F.relu(x)
         x = self.conv2(x)
-        x = F.max_pool2d(x,119)
+        x = F.max_pool2d(x,2)
         x = F.relu(x)
         x = self.conv3(x)
-        x = F.max_pool2d(x, 119)
+        x = F.max_pool2d(x, 2)
         x = F.relu(x)
-        x = x.view(-1, 15680)
+        #print(x.size())
+        x = x.view(-1, 15360)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
-
-        return F.softmax(x)
+        return torch.sigmoid(x)
 
 
 model = Netz()
@@ -242,15 +246,35 @@ def train(epoch):
     for data, target in train_data:
         target = torch.Tensor(target)
         data = Variable(data)
-        target = Variable(target)
+        target = Variable(target)    
+        target = target.float()         #
         optimizer.zero_grad()
         out = model(data)
         criterion = F.binary_cross_entropy
         loss = criterion(out, target)
         loss.backward()
         optimizer.step()
-        print('loss ' + loss)
+        print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+            epoch, batch_id * len(data), len(train_data),
+                100. * batch_id / len(train_data), loss.data))
+        #print('loss ' + str(loss))
         batch_id += 1
+
+def test():
+    model.eval()
+    files = listdir('images/Testimages/')
+    f = random.choice(files)
+    img = Image.open("images/Testimages/" + f)
+    img_eval_tensor = transform(img)
+    img_eval_tensor.unsqueeze_(0)
+    data = Variable(img_eval_tensor)
+    out = model(data)
+    print(out.data.max(1, keepdim=True)[1])
+    img.show()
+    input('')
+
 
 for epoch in range(1,30):
     train(epoch)
+
+test()
