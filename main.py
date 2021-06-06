@@ -205,6 +205,8 @@ for n in range(len(listdir("images/AllDogImages/"))):
 
 
 
+
+
 #print(train_data)
 
 
@@ -215,6 +217,7 @@ class Netz(nn.Module):
         self.conv1 = nn.Conv2d(3, 6, kernel_size=1)       #convolutional layer 1
         self.conv2 = nn.Conv2d(6, 10, kernel_size=1)         #convolutional layer 2
         self.conv3 = nn.Conv2d(10, 15, kernel_size=1)        #convolutional layer 3
+        self.conv_dropout = nn.Dropout2d()
         self.fc1 = nn.Linear(15360, 1000)                    #fully connected layer 1 15360--> Neurons
         self.fc2 = nn.Linear(1000, 120)                     #fully connected layer 120 --> Output (Change)
 
@@ -226,6 +229,62 @@ class Netz(nn.Module):
         x = self.conv2(x)
         x = F.max_pool2d(x,2)
         x = F.relu(x)
+        x = self.conv3(x)
+        x = self.conv_dropout(x)
+        x = F.max_pool2d(x, 2)
+        x = F.relu(x)
+        #print(x.size())    #-- Input neurons
+        #exit()
+        x = x.view(-1, 15360)
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
+        return F.log_softmax(x)
+
+
+model = Netz()
+
+
+optimizer = optim.SGD(model.parameters(), lr=0.1,momentum=0.8)
+def train(epoch):
+    model.train()
+    batch_id=0
+    for data, target in train_data:
+        target = torch.Tensor(target)
+        data = Variable(data)
+        target = Variable(target)
+        target = target.float()
+        optimizer.zero_grad()
+        out = model(data)
+        criterion = F.nll_loss
+        loss = criterion(out, torch.max(target, 1)[1])
+        loss.backward()
+        optimizer.step()
+        print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+            epoch, batch_id * len(data), len(train_data),
+                100. * batch_id / len(train_data), loss.data))
+        #print('loss ' + str(loss))
+        batch_id += 1
+
+def test():
+    model.eval()
+    files = listdir('images/Testimages/')
+    f = random.choice(files)
+    img = Image.open("images/Testimages/" + f)
+    img_eval_tensor = transform(img)
+    img_eval_tensor.unsqueeze_(0)
+    data = Variable(img_eval_tensor)
+    out = model(data)
+    print(out.data.max(1, keepdim=True)[1])
+    img.show()
+    input('')
+
+
+for epoch in range(1,30):
+    train(epoch)
+
+
+
+
         x = self.conv3(x)
         x = F.max_pool2d(x, 2)
         x = F.relu(x)
