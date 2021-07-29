@@ -9,6 +9,7 @@ class PretrainedClassifier:
     img = ""
 
     def __init__(self,image):
+
         dir(self.models)
         self.sets = [self.models.alexnet(pretrained=True),self.models.densenet201(pretrained=True),self.models.googlenet(pretrained=True),
                 self.models.inception_v3(pretrained=True),self.models.mobilenet_v2(pretrained=True),self.models.mobilenet_v3_large(pretrained=True)]
@@ -34,7 +35,7 @@ class PretrainedClassifier:
 
             out = set(batch_t)
 
-            with open('imagenet_classes.txt') as f:
+            with open('F:\PYTHON\Projekte\FindTheDog\ClassifyPretrained\imagenet_classes.txt') as f:
                 classes = [line.strip() for line in f.readlines()]
             #print("Number of classes: {}".format(len(classes)))
 
@@ -63,6 +64,21 @@ class PretrainedClassifier:
         print("ZWEITBESTES ERGEBNIS: "+ str(self.breedLst[len(self.breedLst)-2]), str(self.percentageLst[len(self.percentageLst)-2]))
         print("Schlechtestes ERGEBNIS: " + minBreed, minPercentage)
 
-classi = PretrainedClassifier("img/beagle.jpg")
-classi.classify()
-classi.finalRes()
+    def bestRes(self):
+        n = len(self.percentageLst)
+        for i in range(n - 1):
+            for j in range(0, n - i - 1):
+                if self.percentageLst[j] > self.percentageLst[j + 1]:
+                    self.percentageLst[j], self.percentageLst[j + 1] = self.percentageLst[j + 1], self.percentageLst[j]
+                    self.breedLst[j], self.breedLst[j + 1] = self.breedLst[j + 1], self.breedLst[j]
+
+        maxBreed = str(self.breedLst[len(self.breedLst) - 1])
+
+        maxPercentage = str(self.percentageLst[len(self.percentageLst) - 1])
+
+        print("BESTES ERGEBNIS: " + maxBreed, maxPercentage)
+
+
+#classi = PretrainedClassifier("img/forestCat2.jpg")
+#classi.classify()
+#classi.finalRes()
