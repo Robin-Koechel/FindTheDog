@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-#TRY: https://www.youtube.com/watch?v=f8iiTSCZ9FU
 class SegmentationPretrained:
     import torchvision
     import matplotlib.pyplot as plt
@@ -25,7 +24,7 @@ class SegmentationPretrained:
         self.model = self.torchvision.models.detection.maskrcnn_resnet50_fpn(pretrained=True)
         self.model.eval()
         self.img_path = image_path
-        print("Anzahl Klassen: ",len(self.COCO_Instance_Category_Names))
+        #print("Anzahl Klassen: ",len(self.COCO_Instance_Category_Names))
 
     def get_prediction(self,threshold=0.5):
         img = self.Image.open(self.img_path)
@@ -43,7 +42,7 @@ class SegmentationPretrained:
 
 
     def instance_segmentation(self, threshold=0.5):
-        boxes, pred_cls = self.get_prediction( threshold=threshold)
+        boxes, pred_cls = self.get_prediction(threshold=threshold)
         img = self.cv2.imread(self.img_path)
         img = self.cv2.cvtColor(img, self.cv2.COLOR_BGR2RGB)
         counter  = 0
@@ -52,14 +51,14 @@ class SegmentationPretrained:
             if i not in petLst:
                 counter+=1
             else:
-                print(pred_cls)
+                #print(pred_cls)
                 fig, ax = self.plt.subplots()
                 rect = self.patches.Rectangle((boxes[counter][0][0], boxes[counter][0][1]), boxes[counter][1][0] - boxes[counter][0][0], boxes[counter][1][1] - boxes[counter][0][1], linewidth=3, edgecolor='r', facecolor='none')
                 ax.add_patch(rect)
                 ax.imshow(img)
                 break
-        return img, pred_cls
+        return img, pred_cls[counter], boxes,counter
 
-seg = SegmentationPretrained('F:\PYTHON\Projekte\FindTheDog\ClassifyPretrained\img\cat.jpg')
-seg.instance_segmentation()
-plt.show()
+#seg = SegmentationPretrained('F:\PYTHON\Projekte\FindTheDog\ClassifyPretrained\img\cat.jpg')
+#seg.instance_segmentation()
+#plt.show()
