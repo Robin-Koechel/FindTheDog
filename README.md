@@ -1,4 +1,5 @@
-#FindTheDog
+##FindTheDog
+
 ## Table of Contents
 1. [General Info](#general-info)
 2. [Technologies](#technologies)
@@ -7,11 +8,9 @@
 
 
 ### General Info
-*
 FindTheDog is a computer vision based program for finding missing or accidental animals.
 
 ## Technologies
-*
 A list of technologies used within the project:
 * [Python](https://python.org/)
 * [OpenCV](https://opencv.org/)
@@ -20,5 +19,4 @@ A list of technologies used within the project:
 * [Matplotlib](https://matplotlib.org/)
 
 ## Collaboration
-*
 still at Work
