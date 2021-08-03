@@ -18,5 +18,5 @@ A list of technologies used within the project:
 * [Numpy](https://numpy.org/)
 * [Matplotlib](https://matplotlib.org/)
 
-## Collaboration
+## Status
 still at Work
