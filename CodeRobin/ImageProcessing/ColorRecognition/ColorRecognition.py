@@ -64,8 +64,6 @@ class ColourInImage:
         distance, index = kdt_db.query(rgb_tuple)
         return f' color is: {names[index]}'
 
-
-
 #dom = ColourInImage()
 #dom.plotColour()
 #print("Dominant"+str(dom.closestColor(dom.getDominantColour())) + " ==> " + str(dom.getDominantColour()))
