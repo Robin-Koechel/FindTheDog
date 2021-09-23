@@ -24,7 +24,7 @@ class SegmentationPretrained:
         self.model = self.torchvision.models.detection.maskrcnn_resnet50_fpn(pretrained=True) #Load Pretrained model
         self.model.eval()
         self.img_path = image_path
-        #print("Anzahl Klassen: ",len(self.COCO_Instance_Category_Names))
+        #print("class count: ",len(self.COCO_Instance_Category_Names))
 
     def get_prediction(self,threshold=0.5):
         img = self.Image.open(self.img_path)
@@ -60,8 +60,8 @@ class SegmentationPretrained:
         try:
             return img, pred_cls[counter], boxes,counter
         except IndexError:
-            print("Keine Tiere in diesem Bild! Versuche es noch mal")
+            print("No animals at this photo! Try again")
 
-#seg = SegmentationPretrained('F:\PYTHON\Projekte\FindTheDog\ClassifyPretrained\img\MenschHund.jpg')# create object
+#seg = SegmentationPretrained('F:\PYTHON\Projekte\FindTheDog\ClassifyPretrained\img\MenschHund.jpg')
 #seg.instance_segmentation()#call function
 #plt.show() #plot image
