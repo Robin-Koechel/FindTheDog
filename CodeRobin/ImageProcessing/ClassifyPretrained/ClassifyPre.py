@@ -57,9 +57,9 @@ class PretrainedClassifier:
         maxPercentage = str(self.percentageLst[len(self.percentageLst)-1])
         minPercentage = str(self.percentageLst[0])
 
-        print("\nBESTES ERGEBNIS: "+ maxBreed, maxPercentage)
-        print("ZWEITBESTES ERGEBNIS: "+ str(self.breedLst[len(self.breedLst)-2]), str(self.percentageLst[len(self.percentageLst)-2]))
-        print("Schlechtestes ERGEBNIS: " + minBreed, minPercentage)
+        print("\nbest result: "+ maxBreed, maxPercentage)
+        print("second best result: "+ str(self.breedLst[len(self.breedLst)-2]), str(self.percentageLst[len(self.percentageLst)-2]))
+        print("worst result: " + minBreed, minPercentage)
 
     def bestRes(self):
         n = len(self.percentageLst)
@@ -70,14 +70,13 @@ class PretrainedClassifier:
                     self.breedLst[j], self.breedLst[j + 1] = self.breedLst[j + 1], self.breedLst[j]
 
         maxBreed = str(self.breedLst[len(self.breedLst) - 1])
-
         maxPercentage = str(self.percentageLst[len(self.percentageLst) - 1])
 
-        print("BESTES ERGEBNIS: " + maxBreed, maxPercentage)
+        print("best result: " + maxBreed, maxPercentage)
 
 #try:
     #classi = PretrainedClassifier("img/cat.jpg")
     #classi.classify()
     #classi.finalRes()
 #except FileNotFoundError:
-    #print("Diese Datei gibt es nicht!")
+    #print("This file does not exist!")
