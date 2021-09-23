@@ -14,16 +14,7 @@ A list of technologies used within the project:
 ## Status
 still at work
 
-## output Images
-
-![DiscordImg2](https://user-images.githubusercontent.com/65247410/134475067-89852bea-a146-4c0e-b9c0-22c3c9585f52.jpg)
+## Images
 
 
-![DiscordImg](https://user-images.githubusercontent.com/65247410/134474679-05c6d1a5-1fb3-4d33-9066-883684927b4a.jpg)
-
-
-![DiscordImg3](https://user-images.githubusercontent.com/65247410/134475071-0a14d4fe-3836-4811-a93c-93e8cc12bf86.jpg)
-
-
-
-
+![Dog](https://user-images.githubusercontent.com/65247410/134510776-c3e1574b-0d4c-4ea1-a937-3825157f3d57.PNG)
