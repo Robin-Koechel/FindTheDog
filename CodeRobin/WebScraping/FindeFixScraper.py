@@ -2,7 +2,7 @@ class FindeFix:
     from bs4 import BeautifulSoup as bs
     import requests
     import os
-    from Pet import Pet
+    import Scraping.Pet as Pet
 
     WebsiteUrl = ""
     SuchmeldungsIndex = 0
@@ -12,7 +12,7 @@ class FindeFix:
         self.WebsiteUrl = "https://www.findefix.com/"
         self.SuchmeldungsIndex = 1
 
-    def scrapeAll(self, zuDurchsuchendeSeiten):
+    def scrapePets(self, zuDurchsuchendeSeiten):
         for SuchmeldungsIndex in range(zuDurchsuchendeSeiten):
             page = self.requests.get("https://www.findefix.com/haustier-vermisst-gefunden/aktuelle-suchmeldungen/" \
                                     "?tx_dhrvermisst_vermisst%5B@widget_0%5D%5BcurrentPage%5D="+str(SuchmeldungsIndex))
@@ -36,20 +36,20 @@ class FindeFix:
                             cut2 = cut1.replace("</div>","")
                             if "XXXXXXX" not in cut2 and "vorhanden" not in cut2:
                                 result.append(cut2)
-                        pet = self.Pet(result[0],result[1],result[3],result[2],result[4],str("FindeFixImages/"+filename[33:]))
+                        pet = self.Pet.Pet(result[0],result[1],result[3],result[2],result[4],str("FindeFixImages/"+filename[33:]))
                         self.lstPets.append(pet)
 
     def downloadImage(self,url):
         response = self.requests.get(url)
-        name = self.os.path.join("FindeFixImages", url.split("/")[-1])
+        name = self.os.path.join("F:\PYTHON\Projekte\FindTheDog\Scraping\FindeFixImages\\", url.split("/")[-1])
         with open(name, "wb") as f_out:
             f_out.write(response.content)
 
     def getPetLst(self):
         return self.lstPets
 
-findeFix = FindeFix()
-findeFix.scrapeAll(2)
-lst = findeFix.getPetLst()
-pet1 = lst[0]
-print(pet1.outAll())
+#findeFix = FindeFix()
+#findeFix.scrapeAll(2)
+#lst = findeFix.getPetLst()
+#pet1 = lst[0]
+#print(pet1.outAll())
