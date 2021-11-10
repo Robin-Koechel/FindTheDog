@@ -1,4 +1,3 @@
-#https://colab.research.google.com/drive/1b3TwHdeWAgmZ7n1eOFbzVw1T0oZvC9U6?usp=sharing#scrollTo=eQko07fpEIx4
 import matplotlib.pyplot as plt
 class SegmentationPretrained:
     import torchvision
