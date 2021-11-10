@@ -1,4 +1,3 @@
-#https://github.com/madsendennis/notebooks/blob/master/pytorch/2_PyTorch_with_TORCHVISION.ipynb
 class PretrainedClassifier:
     from torchvision import models
     import torch
