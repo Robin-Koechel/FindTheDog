@@ -12,7 +12,7 @@ A list of technologies used within the project:
 * [Matplotlib](https://matplotlib.org/)
 
 ## Status
-still at work
+paused
 
 ## Images
 
